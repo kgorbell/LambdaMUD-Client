@@ -50,21 +50,20 @@ class Register extends Component {
     }
 
     registerUser = e => {
-        if (this.state.password1 !== this.state.password2) {
-            console.log('The passwords do not match.')
-        } else {
-            const User = {
-                username: this.state.username,
-                password: this.state.password1
-            }
-            axios
-                .post('', User)
-                .then(res => {
-                    console.log('success')
-                })
-                .catch(err => console.log(err.response))
-            this.setState({ username: '', password1: '', password2: ''})
+        const User = {
+            username: this.state.username,
+            password1: this.state.password1,
+            password2: this.state.password2
         }
+        axios
+            .post('http://localhost:8000/api/registration', User)
+            .then(res => {
+                console.log(res.data)
+                localStorage.setItem('key')
+            })
+            .catch(err => console.log(err.response))
+        this.setState({ username: '', password1: '', password2: ''})
+
     }
 
     render() {

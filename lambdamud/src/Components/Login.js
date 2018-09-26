@@ -53,9 +53,9 @@ class Login extends Component {
             password: this.state.password
         }
         axios
-            .post('', User)
+            .post('http://localhost:8000/api/login', User)
             .then(res => {
-                console.log('success')
+                localStorage.setItem('key', res.data.key)
             })
             .catch(err => console.log(err))
         this.setState({ username: '', password: ''})

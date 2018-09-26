@@ -17,7 +17,7 @@ class HomeScreen extends Component {
             <div>
                 <h1>Main Screen</h1>
                 <div>
-                    <p>Welcome!</p>
+                    <p>Welcome, **insert user name here**!</p>
                     <p>If you would like to play Adventure Game, enter 'play' in the input field below.</p>
                 </div>
                 <form>
