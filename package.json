@@ -1,0 +1,8 @@
+{
+  "name": "LambdaMUD-Client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kgorbell/LambdaMUD-Client.git",
+  "author": "Katie Gorbell <katiegorbell@gmail.com>",
+  "license": "MIT"
+}
