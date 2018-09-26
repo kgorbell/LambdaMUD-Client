@@ -1,4 +1,38 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+
+const Header = styled.div`
+    width: 100%;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    padding-left: 15px;
+    line-height: 45px;
+`;
+
+const Content = styled.form`
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+`;
+
+const Input = styled.input`
+    width: 400px;
+    padding-left: 10px;
+    border: 1px solid black;
+    font-size: 18px;
+    line-height: 36px;
+    margin-right: 300px;
+    margin-bottom: 30px;
+`;
 
 class Login extends Component {
     constructor() {
@@ -13,28 +47,54 @@ class Login extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    LoginUser = e => {
+        const User = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        axios
+            .post('', User)
+            .then(res => {
+                console.log('success')
+            })
+            .catch(err => console.log(err))
+        this.setState({ username: '', password: ''})
+    }
+
     render() {
         return (
-            <div>
-                <h1>Login Screen</h1>
-                <form>
-                    <input
+            <Container>
+                <Header>Login Screen</Header>
+                <Content>
+                    <Input
                         type='text'
                         placeholder='Login'
                         name='username'
                         value={this.state.username}
                         onChange={this.updateInputChange}
                     />
-                    <input
+                    <Input
                         type='text'
                         placeholder='Password'
                         name='password'
                         value={this.state.password}
                         onChange={this.updateInputChange}
                     />
-                    <button>Connect</button>
-                </form>
-            </div>
+                    <Link 
+                        to='/HomeScreen' 
+                        onClick={this.LoginUser}
+                        style={{ 
+                            textDecoration:'none', 
+                            width: '100%', 
+                            border:'1px solid black', 
+                            padding: '18px 38px',
+                            borderRadius: '10px',
+                        }}
+                    >
+                        Connect
+                    </Link>
+                </Content>
+            </Container>
         )
     }
 }
