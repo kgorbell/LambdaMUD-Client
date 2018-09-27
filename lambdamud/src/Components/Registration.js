@@ -58,8 +58,7 @@ class Register extends Component {
         axios
             .post('http://localhost:8000/api/registration', User)
             .then(res => {
-                console.log(res.data)
-                localStorage.setItem('key')
+                localStorage.setItem('key', res.data.key)
             })
             .catch(err => console.log(err.response))
         this.setState({ username: '', password1: '', password2: ''})
