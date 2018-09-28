@@ -35,8 +35,8 @@ const Input = styled.input`
 `;
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
             this.state = {
                 username: '',
                 password: '',
@@ -47,19 +47,19 @@ class Login extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    LoginUser = e => {
-        const User = {
-            username: this.state.username,
-            password: this.state.password
-        }
-        axios
-            .post('http://localhost:8000/api/login', User)
-            .then(res => {
-                localStorage.setItem('key', res.data.key)
-            })
-            .catch(err => console.log(err))
-        this.setState({ username: '', password: ''})
-    }
+    // LoginUser = e => {
+    //     const User = {
+    //         username: this.state.username,
+    //         password: this.state.password
+    //     }
+    //     axios
+    //         .post('http://localhost:8000/api/login', User)
+    //         .then(res => {
+    //             localStorage.setItem('key', res.data.key)
+    //         })
+    //         .catch(err => console.log(err))
+    //     this.setState({ username: '', password: ''})
+    // }
 
     render() {
         return (
@@ -82,7 +82,7 @@ class Login extends Component {
                     />
                     <Link 
                         to='/HomeScreen' 
-                        onClick={this.LoginUser}
+                        onClick={() => this.props.loginUser(this.state)}
                         style={{ 
                             textDecoration:'none', 
                             width: '100%', 

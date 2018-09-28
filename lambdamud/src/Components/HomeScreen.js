@@ -1,11 +1,47 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+
+const Header = styled.div`
+    width: 100%;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    padding-left: 15px;
+    line-height: 45px;
+`;
+
+const Instructions = styled.div`
+    width: 100%;
+    border: 1px solid black;
+    margin: 15px 25px;
+    padding-left: 10px;
+`;
+
+const Form = styled.form`
+    width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+`;
+
+const Input = styled.input``;
+
 
 class HomeScreen extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            userData: {},
             userInput: '',
         }
     }
@@ -17,14 +53,7 @@ class HomeScreen extends Component {
                 Authorization: `Token ${token}`
             }
         };
-        axios
-            .get('http://localhost:8000/api/adv/init', reqOptions)
-            .then(res => {
-                this.setState({ userData: res.data })
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
+        this.props.setUserData(reqOptions)
     }
 
     updateInputChange = e => {
@@ -41,16 +70,15 @@ class HomeScreen extends Component {
     }
 
     render() {
-        console.log(this.state.userData)
-        // let ConditionalLink = 
+        console.log(this.props.userData)
         return (
-            <div>
-                <h1>Main Screen</h1>
-                <div>
-                    <p>Welcome, {this.state.userData.name}!</p>
+            <Container>
+                <Header>Main Screen</Header>
+                <Instructions>
+                    <p>Welcome, {this.props.userData.name}!</p>
                     <p>If you would like to play Adventure Game, enter 'play' in the input field below.</p>
-                </div>
-                <form>
+                </Instructions>
+                <Form>
                     <input 
                         type='text'
                         placeholder='User Input'
@@ -59,10 +87,10 @@ class HomeScreen extends Component {
                         onChange={this.updateInputChange}
                     />
 
-                    <button>Send</button>
-                </form>
+                    <Link to='/AdvGame/'>Send</Link>
+                </Form>
 
-            </div>
+            </Container>
         )
     }
 }
